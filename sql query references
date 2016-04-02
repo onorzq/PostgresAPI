@@ -1,0 +1,78 @@
+reference site: http://www.techonthenet.com/postgresql/index.php
+
+database manipulate:
+CREATE DATABASE database_name // create database
+
+DROP DATABASE [ IF EXISTS ] name // delete database
+
+ALTER DATABASE name RENAME TO new_name // rename a database
+
+table manipulate:
+CREATE TABLE table_name
+( 
+  column1 datatype [ NULL | NOT NULL ],
+  column2 datatype [ NULL | NOT NULL ],
+  ...
+); // create table, simple version
+
+CREATE TABLE new_table AS 
+  SELECT expressions
+  FROM existing_tables
+  [WHERE conditions]; // create a table from an existing table by copying the existing table's columns
+
+ALTER TABLE [ IF EXISTS ] table_name RENAME TO new_table_name; // rename a table
+
+DROP TABLE table_name; // delete a table
+
+DROP TABLE [ IF EXISTS ] table_name1, table_name2, ...; // delete multiple tables, if add IF EXISTS then 
+                                                        // check the existence of the tables before delete
+
+column manipulate:
+ALTER TABLE table_name ADD column_name column-definition; // add column, column-definition is data type
+
+ALTER TABLE table_name
+  ADD new_column_name column_definition,
+  ADD new_column_name column_definition,
+  ...
+; // add multiple columns
+
+ALTER TABLE table_name ALTER COLUMN column_name TYPE column_definition; // modify column's data type
+
+ALTER TABLE table_name
+  ALTER COLUMN column_name TYPE column_definition,
+  ALTER COLUMN column_name TYPE column_definition,
+  ...
+; // modify multiple columns' data type
+
+ALTER TABLE table_name DROP COLUMN column_name; // delete a column
+
+ALTER TABLE table_name RENAME COLUMN old_name TO new_name; // rename a column
+
+row manipulate:
+"TABLE name" is equivalent to "SELECT * FROM name" both are list all the records in a table
+
+SELECT expressions FROM tables [WHERE conditions]; // get a list of record
+
+INSERT INTO table
+(column1, column2, ... )
+VALUES
+(expression1 | DEFAULT, expression2 | DEFAULT, ... ),
+(expression1 | DEFAULT, expression2 | DEFAULT, ... ),
+...; // insert multiple records into table
+
+INSERT INTO table (column1, column2, ... ) VALUES (expression1 | DEFAULT, expression2 | DEFAULT, ... ) // insert one record
+
+UPDATE table
+SET column1 = expression1 | DEFAULT,
+    column2 = expression2 | DEFAULT,
+    ...
+[WHERE conditions]; // update one or multiple records, if no condition specify then all records would be updated
+
+DELETE FROM table [WHERE conditions]; // delete rows that meet the condition, if no conditions are provided. delete all rows
+
+cell manipulate:
+UPDATE table SET column1 = expression1 [WHERE conditions]; // update single cell or set single cell to NULL
+                                                           // single cell cannot be deleted or added to a row
+
+* no need to add semicolon in the end
+** upper case words are key words, lower case words are namespace to be replaced
